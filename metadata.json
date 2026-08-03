@@ -1,0 +1,6 @@
+{
+  "name": "MNAero Planner - Vestibular ITA 2026",
+  "description": "Planner de estudos estratégico e completo para o vestibular do ITA com simulados cronometrados, cronograma Gantt, Kanban, ciclo de estudos, 7 etapas de aprendizado, tutor IA local e resumos com fórmulas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
