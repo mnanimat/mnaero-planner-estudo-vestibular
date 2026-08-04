@@ -17,10 +17,14 @@ import { SummariesView } from './components/SummariesView';
 import { VideoLessonsView } from './components/VideoLessonsView';
 import { AnalyticsDashboard } from './components/AnalyticsDashboard';
 import { RedacaoItaView } from './components/RedacaoItaView';
+import { SyllabusItaView } from './components/SyllabusItaView';
+import { IncidenciaTabelasView } from './components/IncidenciaTabelasView';
+import { PomodoroQuickStartSidebar } from './components/PomodoroQuickStartSidebar';
 import { CustomSubjectModal } from './components/CustomSubjectModal';
 import { PhaseGuideModal } from './components/PhaseGuideModal';
 import { LoginAndTermsModal } from './components/LoginAndTermsModal';
 import { LicenseAndTermsModal } from './components/LicenseAndTermsModal';
+import { ExportPdfReportModal } from './components/ExportPdfReportModal';
 
 import { 
   INITIAL_FRENTES, 
@@ -67,6 +71,7 @@ export default function App() {
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isLicenseModalOpen, setIsLicenseModalOpen] = useState(false);
+  const [isExportReportOpen, setIsExportReportOpen] = useState(false);
 
   // Custom Subjects State
   const [customSubjects, setCustomSubjects] = useState<CustomSubject[]>(() => {
@@ -414,6 +419,16 @@ export default function App() {
             />
           )}
 
+          {activeTab === 'programa' && (
+            <SyllabusItaView />
+          )}
+
+          {activeTab === 'tabelas' && (
+            <IncidenciaTabelasView
+              onStartPomodoroForTopic={handleStartPomodoroForTopic}
+            />
+          )}
+
           {activeTab === 'redacao' && (
             <RedacaoItaView />
           )}
@@ -434,6 +449,7 @@ export default function App() {
               frentes={allFrentes}
               topicProgressMap={topicProgressMap}
               onUpdateTopicProgress={handleUpdateTopicProgress}
+              onOpenExportReportModal={() => setIsExportReportOpen(true)}
             />
           )}
 
@@ -477,26 +493,55 @@ export default function App() {
               flashcards={flashcards}
               examTopics={EXAM_TOPICS_DATA}
               streakDays={14}
+              onOpenExportReportModal={() => setIsExportReportOpen(true)}
             />
           )}
         </main>
+
+        {/* Sidebar Widget for Pomodoro Quick-Start */}
+        <PomodoroQuickStartSidebar
+          frentes={allFrentes}
+          agendaTopics={agendaTopics}
+          isTimerRunning={isTimerRunning}
+          activeTimerTopic={activeTimerTopic}
+          onNavigateToPomodoro={() => setActiveTab('pomodoro')}
+          onStartQuickTimer={(durationMinutes, topicName, subject) => {
+            handleStartPomodoroForTopic(topicName, subject);
+          }}
+          onToggleTimerRunning={() => {
+            setIsTimerRunning(!isTimerRunning);
+          }}
+        />
       </div>
 
       {/* Editorial Footer */}
-      <footer className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 mt-12 border-t-2 border-black flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] uppercase font-bold tracking-widest text-black/70 font-mono">
-        <div className="flex flex-wrap gap-6 items-center">
-          <span className="border-b border-black">MNAERO PLANNER // ITA 2027</span>
-          <span>DESENVOLVEDOR: MICAEL NILDO OLIVEIRA SOUZA</span>
-          <span>14 FRENTES MAPEADAS</span>
-        </div>
-        <div className="flex items-center gap-3">
+      <footer className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 mt-12 border-t-2 border-black space-y-4 font-mono">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs font-sans text-black/80">
+          <p className="leading-relaxed max-w-4xl">
+            <strong>MNAero Planner // ITA 2027</strong> — Plataforma educacional independente desenvolvida por <strong>Micael Nildo Oliveira Souza</strong> sob a Licença MIT. Os conteúdos, provas e diretrizes do exame foram obtidos no site oficial do Vestibular ITA (vestibular.ita.br). As videoaulas exibidas são incorporadas do YouTube através de sua API oficial e pertencem aos seus respectivos criadores. Este projeto não possui vínculo institucional com o Instituto Tecnológico de Aeronáutica (ITA), Comando da Aeronáutica ou Google LLC.
+          </p>
           <button
             onClick={() => setIsLicenseModalOpen(true)}
-            className="underline hover:text-[#FF6321] cursor-pointer"
+            className="px-3.5 py-1.5 bg-black hover:bg-[#FF6321] text-white hover:text-black font-mono font-bold text-[10px] uppercase border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer shrink-0"
           >
-            LICENÇA MIT & TERMOS
+            Créditos, Licença & Avisos Legais
           </button>
-          <span>// ESTUDO TOTAL ESTIMADO: 1.240H</span>
+        </div>
+
+        <div className="pt-3 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] uppercase font-bold tracking-widest text-black/60">
+          <div className="flex flex-wrap gap-4 items-center">
+            <span>DESENVOLVEDOR: MICAEL NILDO OLIVEIRA SOUZA</span>
+            <span>// 14 FRENTES MAPEADAS</span>
+            <span>// ESTUDO TOTAL ESTIMADO: 1.240H</span>
+          </div>
+          <div>
+            <button
+              onClick={() => setIsLicenseModalOpen(true)}
+              className="underline hover:text-[#FF6321] cursor-pointer"
+            >
+              TERMOS DE USO E CRÉDITOS COMPLETOS
+            </button>
+          </div>
         </div>
       </footer>
 
@@ -546,6 +591,16 @@ export default function App() {
       <LicenseAndTermsModal
         isOpen={isLicenseModalOpen}
         onClose={() => setIsLicenseModalOpen(false)}
+      />
+
+      {/* PDF Progress & Study Logs Export Modal */}
+      <ExportPdfReportModal
+        isOpen={isExportReportOpen}
+        onClose={() => setIsExportReportOpen(false)}
+        frentes={allFrentes}
+        topicProgressMap={topicProgressMap}
+        studyLogs={studyLogs}
+        currentUserProfile={currentUserProfile}
       />
     </div>
   );

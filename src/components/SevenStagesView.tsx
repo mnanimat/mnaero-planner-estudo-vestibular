@@ -14,19 +14,22 @@ import {
   Sparkles, 
   AlertTriangle, 
   BookOpen,
-  ArrowRight
+  ArrowRight,
+  Printer
 } from 'lucide-react';
 
 interface SevenStagesViewProps {
   frentes: FrenteInfo[];
   topicProgressMap: Record<string, TopicProgress>;
   onUpdateTopicProgress: (topicId: string, progress: TopicProgress) => void;
+  onOpenExportReportModal?: () => void;
 }
 
 export const SevenStagesView: React.FC<SevenStagesViewProps> = ({
   frentes,
   topicProgressMap,
   onUpdateTopicProgress,
+  onOpenExportReportModal,
 }) => {
   const [selectedFrenteId, setSelectedFrenteId] = useState<string>(frentes[0]?.id || 'MAT-1');
   const [selectedTopic, setSelectedTopic] = useState<string>('');
@@ -190,6 +193,19 @@ export const SevenStagesView: React.FC<SevenStagesViewProps> = ({
                 ))}
               </select>
             </div>
+
+            {onOpenExportReportModal && (
+              <div className="flex items-end">
+                <button
+                  type="button"
+                  onClick={onOpenExportReportModal}
+                  className="bg-black hover:bg-[#FF6321] hover:text-black text-white font-bold text-xs uppercase px-3.5 py-2 border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer flex items-center gap-1.5"
+                >
+                  <Printer className="w-3.5 h-3.5 text-[#FF6321] group-hover:text-black" />
+                  <span>Relatório PDF</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
 

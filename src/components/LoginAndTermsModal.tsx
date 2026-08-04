@@ -96,10 +96,10 @@ export const LoginAndTermsModal: React.FC<LoginAndTermsModalProps> = ({
         <div className="p-3 bg-[#F7F3EF] border-2 border-black text-xs text-black space-y-1">
           <span className="font-bold text-black uppercase flex items-center gap-1.5 text-[11px]">
             <ShieldCheck className="w-4 h-4 text-[#FF6321]" />
-            Aviso de Uso Legal do Nome
+            Aviso de Isenção, Direitos Autorais & API do YouTube
           </span>
-          <p className="text-[10px] text-black/80 font-sans">
-            A plataforma MNAero Planner não tem vínculo com o Instituto Tecnológico de Aeronáutica (ITA) e respeita o uso de seu nome dentro da lei.
+          <p className="text-[10px] text-black/80 font-sans leading-relaxed">
+            MNAero Planner // ITA 2027 — Plataforma educacional independente criada sob a Licença MIT. Os conteúdos, provas e diretrizes do exame foram obtidos no site do Vestibular ITA. As videoaulas exibidas são incorporadas do YouTube através de sua API oficial e pertencem aos seus respectivos criadores. Este projeto não possui vínculo institucional com o Instituto Tecnológico de Aeronáutica (ITA), Comando da Aeronáutica ou Google LLC.
           </p>
         </div>
 

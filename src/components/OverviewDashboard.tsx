@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import { FrenteInfo, AgendaTopic, StudyLog, Flashcard, ExamTopicData, Subject } from '../types';
 import { ItaCountdownBanner } from './ItaCountdownBanner';
+import { DailyGanttProgressWidget } from './DailyGanttProgressWidget';
 
 interface OverviewDashboardProps {
   frentes: FrenteInfo[];
@@ -170,6 +171,14 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
         </div>
       </div>
 
+      {/* Daily Progress vs Gantt Schedule Widget with Circular Progress Ring */}
+      <DailyGanttProgressWidget
+        studyLogs={studyLogs}
+        agendaTopics={agendaTopics}
+        onNavigateTab={onNavigateTab}
+        onStartPomodoroTopic={onStartPomodoroTopic}
+      />
+
       {/* Top 5 Key Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {/* Metric 1: Total Hours */}
@@ -221,6 +230,36 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
           <div className="text-2xl font-black text-black">{driveTopics.length} arquivos</div>
           <p className="text-[10px] text-black/60 font-bold uppercase">PDFs & Imagens</p>
         </div>
+      </div>
+
+      {/* Edital & Syllabus Callout Card */}
+      <div className="bg-[#F7F3EF] border-2 border-black p-4 sm:p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-black text-[#FF6321] border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] shrink-0">
+            <BookOpen className="w-6 h-6" />
+          </div>
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase text-[#FF6321] tracking-wider">
+              <Award className="w-3.5 h-3.5" />
+              <span>Programa Oficial Mapeado</span>
+            </div>
+            <h3 className="font-serif font-black text-base sm:text-lg italic text-black">
+              Edital & Conteúdo Programático Unificado ITA 2026
+            </h3>
+            <p className="text-xs font-sans text-black/80">
+              Consulte todos os tópicos de Física, Matemática, Química, Português, Literatura, Inglês e Redação do ITA com estatística de incidência e bibliografia recomendada.
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => onNavigateTab('programa')}
+          className="px-5 py-2.5 bg-black hover:bg-[#FF6321] text-white hover:text-black font-bold text-xs uppercase border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer shrink-0 flex items-center gap-2"
+        >
+          <span>Abrir Programa ITA</span>
+          <ChevronRight className="w-4 h-4" />
+        </button>
       </div>
 
       {/* Main Grid Section 1: Agenda Routine Snapshot & Study Cycle */}

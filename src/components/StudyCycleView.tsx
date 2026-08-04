@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FrenteInfo, StudyCycleConfig } from '../types';
-import { RotateCcw, Sliders, CheckSquare, Square, Info, Sparkles, Award } from 'lucide-react';
+import { RotateCcw, Sliders, CheckSquare, Square, Info, Sparkles, Award, BookOpen, Layers } from 'lucide-react';
 
 interface StudyCycleViewProps {
   frentes: FrenteInfo[];
@@ -234,38 +234,66 @@ export const StudyCycleView: React.FC<StudyCycleViewProps> = ({
                     return (
                       <div
                         key={item.id}
-                        className="bg-white border border-black p-3 flex flex-col justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                        className="bg-white border-2 border-black p-3.5 flex flex-col justify-between shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:border-[#FF6321] transition-all"
                       >
-                        <div className="flex items-start justify-between gap-2 mb-2">
-                          <div>
-                            <span className="text-xs font-mono font-black text-black">{item.id}</span>
-                            <div className="text-[11px] text-black/80 font-medium line-clamp-1">{item.name}</div>
+                        <div className="space-y-2">
+                          <div className="flex items-start justify-between gap-2">
+                            <div>
+                              <span className="text-xs font-mono font-black text-black bg-[#FF6321] px-1.5 py-0.2 border border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                                {item.id}
+                              </span>
+                              <div className="text-xs font-serif font-black italic text-black mt-1">
+                                {item.name}
+                              </div>
+                            </div>
+                            <span className="text-[10px] bg-black text-white font-mono font-bold px-1.5 py-0.5 uppercase shrink-0">
+                              {item.blockCount} Bloco{item.blockCount > 1 ? 's' : ''} ({item.hoursRounded}h)
+                            </span>
                           </div>
-                          <span className="text-[10px] bg-black text-white font-mono font-bold px-1.5 py-0.5 uppercase">
-                            {item.blockCount} B ({item.hoursRounded}h)
-                          </span>
+
+                          {/* Topics List from Ciclo de Estudos.html */}
+                          {item.topics && item.topics.length > 0 && (
+                            <div className="bg-[#F7F3EF] border border-black p-2 space-y-1 text-[10px] font-sans">
+                              <div className="font-mono font-bold uppercase text-[9px] text-black/60 flex items-center gap-1">
+                                <BookOpen className="w-3 h-3 text-[#FF6321]" />
+                                Mapeamento do Edital:
+                              </div>
+                              <ul className="space-y-0.5 text-black/80 list-disc list-inside line-clamp-3 font-medium">
+                                {item.topics.map((t, idx) => (
+                                  <li key={idx} className="truncate">
+                                    {t}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                         </div>
 
                         {/* Block checkboxes */}
-                        <div className="flex flex-wrap gap-1.5 mt-2">
-                          {Array.from({ length: item.blockCount }).map((_, idx) => {
-                            const isChecked = idx < doneCount;
-                            return (
-                              <button
-                                key={idx}
-                                onClick={() => onToggleBlock(item.id, idx)}
-                                className={`flex items-center gap-1 text-xs px-2 py-1 font-mono transition-all cursor-pointer border border-black ${
-                                  isChecked
-                                    ? 'bg-[#FF6321] text-black font-bold shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]'
-                                    : 'bg-white hover:bg-black/10 text-black/70'
-                                }`}
-                                title={`Bloco ${idx + 1} de ${item.id}`}
-                              >
-                                {isChecked ? <CheckSquare className="w-3.5 h-3.5 text-black" /> : <Square className="w-3.5 h-3.5 text-black/40" />}
-                                <span>B{idx + 1}</span>
-                              </button>
-                            );
-                          })}
+                        <div className="pt-2 border-t border-black/10 mt-3">
+                          <div className="text-[9px] font-mono font-bold uppercase text-black/60 mb-1">
+                            Sequência de Execução ({doneCount}/{item.blockCount}):
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {Array.from({ length: item.blockCount }).map((_, idx) => {
+                              const isChecked = idx < doneCount;
+                              return (
+                                <button
+                                  key={idx}
+                                  onClick={() => onToggleBlock(item.id, idx)}
+                                  className={`flex items-center gap-1 text-xs px-2 py-1 font-mono transition-all cursor-pointer border border-black ${
+                                    isChecked
+                                      ? 'bg-[#FF6321] text-black font-bold shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]'
+                                      : 'bg-white hover:bg-black/10 text-black/70'
+                                  }`}
+                                  title={`Bloco ${idx + 1} de ${item.id}`}
+                                >
+                                  {isChecked ? <CheckSquare className="w-3.5 h-3.5 text-black" /> : <Square className="w-3.5 h-3.5 text-black/40" />}
+                                  <span>B{idx + 1}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
                       </div>
                     );

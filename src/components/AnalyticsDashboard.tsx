@@ -15,13 +15,14 @@ import {
   Area, 
   CartesianGrid 
 } from 'recharts';
-import { BarChart3, Clock, Calendar, Zap, AlertTriangle, Flame, TrendingUp, Award, CheckCircle2 } from 'lucide-react';
+import { BarChart3, Clock, Calendar, Zap, AlertTriangle, Flame, TrendingUp, Award, CheckCircle2, Printer } from 'lucide-react';
 
 interface AnalyticsDashboardProps {
   studyLogs: StudyLog[];
   flashcards: Flashcard[];
   examTopics: ExamTopicData[];
   streakDays: number;
+  onOpenExportReportModal?: () => void;
 }
 
 export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
@@ -29,6 +30,7 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
   flashcards,
   examTopics,
   streakDays,
+  onOpenExportReportModal,
 }) => {
   const [timeframe, setTimeframe] = useState<'daily' | 'weekly' | 'yearly'>('daily');
 
@@ -123,38 +125,51 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
           </p>
         </div>
 
-        {/* Timeframe Toggle */}
-        <div className="flex bg-[#F7F3EF] p-1.5 border border-black font-mono text-xs font-bold">
-          <button
-            onClick={() => setTimeframe('daily')}
-            className={`px-3.5 py-1.5 transition-all cursor-pointer border border-black uppercase ${
-              timeframe === 'daily'
-                ? 'bg-black text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                : 'text-black hover:bg-black/10'
-            }`}
-          >
-            Por Dia
-          </button>
-          <button
-            onClick={() => setTimeframe('weekly')}
-            className={`px-3.5 py-1.5 transition-all cursor-pointer border border-black uppercase ${
-              timeframe === 'weekly'
-                ? 'bg-black text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                : 'text-black hover:bg-black/10'
-            }`}
-          >
-            Por Semana
-          </button>
-          <button
-            onClick={() => setTimeframe('yearly')}
-            className={`px-3.5 py-1.5 transition-all cursor-pointer border border-black uppercase ${
-              timeframe === 'yearly'
-                ? 'bg-black text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                : 'text-black hover:bg-black/10'
-            }`}
-          >
-            Por Ano
-          </button>
+        {/* Timeframe Toggle & Export PDF */}
+        <div className="flex flex-wrap items-center gap-3">
+          {onOpenExportReportModal && (
+            <button
+              type="button"
+              onClick={onOpenExportReportModal}
+              className="bg-[#FF6321] hover:bg-black hover:text-white text-black font-bold text-xs font-mono uppercase px-3.5 py-2 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer flex items-center gap-2"
+            >
+              <Printer className="w-4 h-4" />
+              <span>Gerar Relatório PDF</span>
+            </button>
+          )}
+
+          <div className="flex bg-[#F7F3EF] p-1.5 border border-black font-mono text-xs font-bold">
+            <button
+              onClick={() => setTimeframe('daily')}
+              className={`px-3.5 py-1.5 transition-all cursor-pointer border border-black uppercase ${
+                timeframe === 'daily'
+                  ? 'bg-black text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
+                  : 'text-black hover:bg-black/10'
+              }`}
+            >
+              Por Dia
+            </button>
+            <button
+              onClick={() => setTimeframe('weekly')}
+              className={`px-3.5 py-1.5 transition-all cursor-pointer border border-black uppercase ${
+                timeframe === 'weekly'
+                  ? 'bg-black text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
+                  : 'text-black hover:bg-black/10'
+              }`}
+            >
+              Por Semana
+            </button>
+            <button
+              onClick={() => setTimeframe('yearly')}
+              className={`px-3.5 py-1.5 transition-all cursor-pointer border border-black uppercase ${
+                timeframe === 'yearly'
+                  ? 'bg-black text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
+                  : 'text-black hover:bg-black/10'
+              }`}
+            >
+              Por Ano
+            </button>
+          </div>
         </div>
       </div>
 

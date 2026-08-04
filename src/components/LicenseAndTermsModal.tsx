@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, FileText, CheckCircle2, Scale } from 'lucide-react';
+import { ShieldCheck, FileText, CheckCircle2, Scale, ExternalLink, Youtube, BookOpen, Award, Heart } from 'lucide-react';
 
 interface LicenseAndTermsModalProps {
   isOpen: boolean;
@@ -19,61 +19,130 @@ export const LicenseAndTermsModal: React.FC<LicenseAndTermsModalProps> = ({ isOp
               MNAero Planner // Documentação Legal & Licença
             </span>
             <h3 className="text-xl sm:text-2xl font-serif font-black italic text-black">
-              Licença MIT & Termos de Uso
+              Créditos, Licença e Avisos Legais — MNAero Planner
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="text-black hover:bg-black hover:text-white border-2 border-black p-1.5 font-bold cursor-pointer"
+            className="text-black hover:bg-black hover:text-white border-2 border-black p-1.5 font-bold cursor-pointer transition-all"
           >
             ✕
           </button>
         </div>
 
-        {/* Developer Attribution Box */}
-        <div className="p-4 bg-black text-white border-2 border-black space-y-1">
-          <span className="text-[10px] text-[#FF6321] uppercase font-bold tracking-widest block">
-            Desenvolvedor do Projeto
-          </span>
-          <h4 className="text-base font-serif font-black text-white italic">
-            Micael Nildo Oliveira Souza
+        {/* Developer & Platform Identity Box */}
+        <div className="p-4 bg-black text-white border-2 border-black space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-[#FF6321] uppercase font-bold tracking-widest block">
+              Plataforma Educacional Independente
+            </span>
+            <span className="bg-[#FF6321] text-black text-[10px] font-bold px-2 py-0.5 uppercase">
+              Licença MIT
+            </span>
+          </div>
+          <h4 className="text-base sm:text-lg font-serif font-black text-white italic">
+            MNAero Planner // ITA 2027
           </h4>
-          <p className="text-xs text-zinc-300 font-sans">
-            Plataforma MNAero Planner - Ferramenta aberta e gratuita desenvolvida para auxiliar vestibulandos na preparação para o vestibular do ITA.
+          <p className="text-xs text-zinc-300 font-sans leading-relaxed">
+            Plataforma educacional independente desenvolvida por <strong>Micael Nildo Oliveira Souza</strong> para auxiliar estudantes na preparação de alta performance para o vestibular do Instituto Tecnológico de Aeronáutica (ITA).
           </p>
         </div>
 
-        {/* Legal Disclaimer Box */}
-        <div className="p-3 bg-[#F7F3EF] border-2 border-black text-xs text-black space-y-1">
-          <span className="font-bold text-black uppercase flex items-center gap-1.5 text-[11px]">
-            <ShieldCheck className="w-4 h-4 text-[#FF6321]" />
-            Aviso de Isenção e Uso de Marca
-          </span>
-          <p className="text-[11px] text-black/80 font-sans">
-            A plataforma MNAero Planner não tem vínculo com o Instituto Tecnológico de Aeronáutica (ITA) e respeita o uso de seu nome dentro da lei.
-          </p>
-        </div>
-
-        {/* Privacy Policy & Local Storage Terms */}
-        <div className="p-4 bg-zinc-900 text-white border-2 border-black space-y-3 text-xs">
-          <h5 className="font-bold text-[#FF6321] uppercase border-b border-zinc-700 pb-2 flex items-center gap-2">
-            <FileText className="w-4 h-4" /> Política de Privacidade & Termos de Armazenamento Local
+        {/* Créditos e Fontes Originais */}
+        <div className="p-4 bg-[#F7F3EF] border-2 border-black space-y-3">
+          <h5 className="font-bold text-black uppercase border-b-2 border-black pb-1.5 flex items-center gap-2 text-xs">
+            <Award className="w-4 h-4 text-[#FF6321]" /> Créditos e Fontes de Dados
           </h5>
-          <div className="space-y-2 text-[11px] font-sans text-zinc-300 leading-relaxed">
+          <div className="space-y-2 text-xs font-sans text-black/90 leading-relaxed">
             <p>
-              <strong>1. Armazenamento Exclusivamente Local:</strong> O MNAero Planner opera em modo 100% local e cliente-side. Todas as informações inseridas pelo usuário — incluindo dados cadastrais, matérias, tópicos do cronograma, cartões de flashcards, autoexplicações do método Feynman, diagnósticos de erros, dados do ciclo de estudos e histórico de simulados — são salvas diretamente no armazenamento do seu próprio navegador (<code className="text-[#FF6321]">localStorage</code>).
+              <strong>Fonte Original:</strong> O material de apoio, enunciados e diretrizes referentes aos exames de admissão presentes nesta plataforma utilizam dados e documentos disponibilizados publicamente no site oficial do Vestibular ITA (
+              <a 
+                href="https://www.vestibular.ita.br/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-[#FF6321] underline font-mono font-bold hover:text-black inline-flex items-center gap-0.5"
+              >
+                https://www.vestibular.ita.br/ <ExternalLink className="w-3 h-3 inline" />
+              </a>).
             </p>
             <p>
-              <strong>2. Sem Envio para Servidores Externos ou APIs de IA:</strong> Não realizamos chamadas ou conexões com APIs de inteligência artificial da Gemini, OpenAI ou qualquer outro servidor externo para processar seus dados. A aplicação roda inteiramente de forma autônoma na sua máquina.
+              <strong>Direitos Autorais:</strong> Todos os direitos sobre as provas originais e marcas registradas pertencem ao Instituto Tecnológico de Aeronáutica (ITA) e ao Comando da Aeronáutica.
             </p>
             <p>
-              <strong>3. Controle Absoluto & LGPD:</strong> Em consonância com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018), você possui autonomia irrestrita sobre suas informações. Seus dados nunca são vendidos, compartilhados ou coletados por terceiros. Você pode exportar seu backup local em JSON ou limpar o armazenamento a qualquer momento nas configurações do seu navegador.
+              <strong>Caráter Educacional:</strong> Esta ferramenta foi criada com fins exclusivamente educacionais e de auxílio ao estudante, sem qualquer afiliação, patrocínio ou endorsement oficial do ITA.
+            </p>
+            <p>
+              <strong>Recurso de Mapeamento de Frequência e Ciclo de Estudos:</strong> Planilha sobre incidência de questões no Prova do Vestibular ITA da marishee (
+              <a 
+                href="https://www.youtube.com/@marishee" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-[#FF6321] underline font-mono font-bold hover:text-black inline-flex items-center gap-0.5"
+              >
+                https://www.youtube.com/@marishee <ExternalLink className="w-3 h-3 inline" />
+              </a>) foi usada como recurso para a criação da plataforma.
             </p>
           </div>
         </div>
 
+        {/* Termos de Uso e Créditos Completos - Seções 1, 2 e 3 */}
+        <div className="space-y-4">
+          <h4 className="font-serif font-black text-lg italic border-b-2 border-black pb-1 text-black">
+            Termos de Uso e Créditos Completos
+          </h4>
+
+          {/* Seção 1 */}
+          <div className="p-4 bg-white border-2 border-black space-y-1.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+            <h5 className="font-bold text-xs uppercase text-[#FF6321] flex items-center gap-2">
+              <FileText className="w-4 h-4" /> 1. Licenciamento do Código e Plataforma
+            </h5>
+            <p className="text-xs font-sans text-black/90 leading-relaxed">
+              O MNAero Planner é um software de auxílio ao estudante desenvolvido e disponibilizado sob a <strong>Licença MIT</strong>. O código da plataforma é livre e aberto para fins educacionais.
+            </p>
+          </div>
+
+          {/* Seção 2 */}
+          <div className="p-4 bg-white border-2 border-black space-y-1.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+            <h5 className="font-bold text-xs uppercase text-[#FF6321] flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4" /> 2. Isenção de Vínculo Institucional (ITA)
+            </h5>
+            <div className="text-xs font-sans text-black/90 space-y-1.5 leading-relaxed">
+              <p>
+                A plataforma MNAero Planner não possui qualquer vínculo oficial, patrocínio, parceria ou endosso com o Instituto Tecnológico de Aeronáutica (ITA), com o Comando da Aeronáutica ou com a Google LLC.
+              </p>
+              <p>
+                Todas as informações sobre o processo seletivo, matrizes de conteúdos, provas e editais foram obtidas a partir do portal público oficial do Vestibular ITA.
+              </p>
+              <p>
+                As marcas e nomes de instituições mencionadas pertencem aos seus respectivos titulares e são citados exclusivamente para fins de referência de estudo.
+              </p>
+            </div>
+          </div>
+
+          {/* Seção 3 */}
+          <div className="p-4 bg-[#F7F3EF] border-2 border-black space-y-2.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+            <h5 className="font-bold text-xs uppercase text-black border-b border-black/20 pb-1 flex items-center gap-2">
+              <Youtube className="w-4 h-4 text-red-600" /> 3. Exibição de Mídia e Videoaulas (YouTube API)
+            </h5>
+            <div className="text-xs font-sans text-black/90 space-y-2 leading-relaxed">
+              <p>
+                <strong>Modo de Exibição:</strong> Todas as videoaulas exibidas nesta plataforma são reproduzidas diretamente via tecnologia de incorporação (embed) oficial da API do YouTube.
+              </p>
+              <p>
+                <strong>Propriedade Intelectual e Monetização:</strong> O MNAero Planner não realiza download, hospedagem ou modificação dos arquivos de vídeo. A autoria, direitos autorais, métricas de visualização e monetização (anúncios) pertencem integralmente aos criadores e canais originais do YouTube (como Catálise Vestibulares, Física para ITA/IME - Prof. Renato Brito, Química em Ação - Prof. Paulo Valim, entre outros).
+              </p>
+              <p>
+                <strong>Conformidade Legal:</strong> A reprodução ocorre em estrita conformidade com os Termos de Serviço do YouTube, a Lei de Direitos Autorais Brasileira (Lei nº 9.610/1998 - Art. 46), o Marco Civil da Internet (Lei nº 12.965/2014) e tratados internacionais de propriedade intelectual (Convenção de Berna / WIPO).
+              </p>
+              <p>
+                <strong>Incentivo aos Criadores:</strong> Encorajamos os estudantes a se inscreverem, curtirem e apoiarem os canais originais diretamente no YouTube através dos links fornecidos em cada aula.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Side-by-Side MIT License Texts */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono pt-2">
           {/* English Original */}
           <div className="p-4 bg-zinc-900 text-zinc-200 border-2 border-black space-y-2">
             <h5 className="font-bold text-[#FF6321] uppercase border-b border-zinc-700 pb-1 flex items-center gap-1.5">
@@ -136,3 +205,4 @@ O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU
     </div>
   );
 };
+
