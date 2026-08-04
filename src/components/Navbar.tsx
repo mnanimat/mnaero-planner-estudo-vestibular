@@ -94,7 +94,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'tabelas', label: 'Estatísticas ITA', icon: TrendingUp, badge: 'INCIDÊNCIA' },
     { id: 'agenda', label: 'Agenda & Gantt', icon: CalendarIcon },
     { id: 'simulados', label: 'Provas Antigas ITA', icon: Award, badge: 'PROVAS' },
-    { id: 'redacao', label: 'Redação ITA', icon: PenTool, badge: 'NOVO' },
+    { id: 'redacao', label: 'Redação ITA', icon: PenTool, badge: 'CORREÇÃO' },
     { id: 'cycle', label: 'Ciclo de Estudos', icon: RotateCcw },
     { id: 'stages', label: '7 Etapas', icon: Layers },
     { id: 'pomodoro', label: 'Pomodoro', icon: Clock, badge: isTimerRunning ? 'Ativo' : undefined },
