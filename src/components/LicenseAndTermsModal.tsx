@@ -72,15 +72,15 @@ export const LicenseAndTermsModal: React.FC<LicenseAndTermsModalProps> = ({ isOp
               <strong>Caráter Educacional:</strong> Esta ferramenta foi criada com fins exclusivamente educacionais e de auxílio ao estudante, sem qualquer afiliação, patrocínio ou endorsement oficial do ITA.
             </p>
             <p>
-              <strong>Recurso de Mapeamento de Frequência e Ciclo de Estudos:</strong> Planilha sobre incidência de questões no Prova do Vestibular ITA da marishee 
+              <strong>Mapeamento de Frequência e Ciclo de Estudos:</strong> Planilha sobre incidência de questões no Prova do Vestibular ITA da marishee ( 
               <a 
-                href="(https://www.youtube.com/@marishee)" 
+                href="https://www.youtube.com/@marishee" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-[#FF6321] underline font-mono font-bold hover:text-black inline-flex items-center gap-0.5"
               >
                 https://www.youtube.com/@marishee <ExternalLink className="w-3 h-3 inline" />
-              </a>foi usada como recurso para a criação da plataforma.
+              </a>) foi usada como recurso para a criação da plataforma.
             </p>
           </div>
         </div>
